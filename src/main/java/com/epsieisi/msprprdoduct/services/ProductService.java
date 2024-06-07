@@ -18,4 +18,8 @@ public interface ProductService {
     ProductDto updateProduct(Long productId, ProductDto productDto);
 
     void deleteProduct(Long productId);
+
+    Boolean isAvailable(Long idProduct, Integer askedQuantity);
+
+    ProductDto decrementStock(Long idProduct, Integer askedQuantity);
 }

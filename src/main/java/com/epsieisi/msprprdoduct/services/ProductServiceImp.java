@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +36,7 @@ public class ProductServiceImp implements ProductService{
     @Override
     public ProductDto getProductById(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Employee is not exist with given id: "+ productId)
+                () -> new ResourceNotFoundException("Produit"+ productId+ "introuvable dans la base de donnée")
         );
         return ProductMapper.mapToProductDto(product);
     }
@@ -43,7 +44,7 @@ public class ProductServiceImp implements ProductService{
     @Override
     public ProductDto updateProduct(Long productId, ProductDto productDto) {
         Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Employee is not exist with given id: "+ productId)
+                () -> new ResourceNotFoundException("Produit"+ productId+ "introuvable dans la base de donnée")
         );
         product.setProductName(productDto.getProductName());
         product.setDescription(productDto.getDescription());
@@ -63,6 +64,32 @@ public class ProductServiceImp implements ProductService{
                 () -> new ResourceNotFoundException("Employee is not exist with given id: "+ productId)
         );
         productRepository.deleteById(productId);
+    }
+
+    @Override
+    public Boolean isAvailable  (Long idProduct, Integer askedQuantity) {
+        ProductDto productDto = getProductById(idProduct);
+        if(productDto != null){
+            if (productDto.getStockQuantity() >= askedQuantity)
+                return true;
+            else
+                return false;
+        }
+        else {
+            throw new ResourceNotFoundException("Produit introuvable dans la base");
+        }
+    }
+
+    @Override
+    public ProductDto decrementStock(Long idProduct, Integer askedQuantity) {
+        if(isAvailable(idProduct, askedQuantity)){
+            ProductDto productDto = getProductById(idProduct);
+            productDto.setStockQuantity(productDto.getStockQuantity() - askedQuantity);
+            return updateProduct(idProduct,productDto);
+        }
+        else {
+            throw new ResourceNotFoundException("Produit introuvable dans la base");
+        }
     }
 
 

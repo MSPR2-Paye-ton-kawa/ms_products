@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,10 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(currentDateTime);
+        productDto.setCreationDate(timestamp);
+        productDto.setLastUpdate(timestamp);
         ProductDto savedProduct = productService.createProduct(productDto);
         return  new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
@@ -51,5 +58,11 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable("id") Long productId){
         productService.deleteProduct(productId);
         return ResponseEntity.ok("Product deleted successfully");
+    }
+
+    @PutMapping("/{id}/{quantity}")
+    public ResponseEntity<ProductDto> decrementStock(@PathVariable("id") Long productId,@PathVariable("quantity") Integer askedQuantity) {
+        ProductDto productDto = productService.decrementStock(productId, askedQuantity);
+        return ResponseEntity.ok(productDto);
     }
 }
