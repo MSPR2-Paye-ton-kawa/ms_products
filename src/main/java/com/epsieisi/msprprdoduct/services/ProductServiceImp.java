@@ -36,7 +36,7 @@ public class ProductServiceImp implements ProductService{
     @Override
     public ProductDto getProductById(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Produit"+ productId+ "introuvable dans la base de donnée")
+                () -> new ResourceNotFoundException("The product doesn't exist in the database")
         );
         return ProductMapper.mapToProductDto(product);
     }
@@ -44,7 +44,7 @@ public class ProductServiceImp implements ProductService{
     @Override
     public ProductDto updateProduct(Long productId, ProductDto productDto) {
         Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Produit"+ productId+ "introuvable dans la base de donnée")
+                () -> new ResourceNotFoundException("The product doesn't exist in the database")
         );
         product.setProductName(productDto.getProductName());
         product.setDescription(productDto.getDescription());
@@ -61,10 +61,11 @@ public class ProductServiceImp implements ProductService{
     @Override
     public void deleteProduct(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(
-                () -> new ResourceNotFoundException("Employee is not exist with given id: "+ productId)
+                () -> new ResourceNotFoundException("Le  "+ productId)
         );
         productRepository.deleteById(productId);
     }
+
 
     @Override
     public Boolean isAvailable  (Long idProduct, Integer askedQuantity) {
@@ -76,7 +77,7 @@ public class ProductServiceImp implements ProductService{
                 return false;
         }
         else {
-            throw new ResourceNotFoundException("Produit introuvable dans la base");
+            throw new ResourceNotFoundException("The product doesn't exist in the database");
         }
     }
 
@@ -88,7 +89,7 @@ public class ProductServiceImp implements ProductService{
             return updateProduct(idProduct,productDto);
         }
         else {
-            throw new ResourceNotFoundException("Produit introuvable dans la base");
+            throw new ResourceNotFoundException("The product doesn't exist in the database");
         }
     }
 

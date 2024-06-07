@@ -12,37 +12,30 @@ public class ProductMapper {
     public  static ProductDto mapToProductDto(Product product){
         return new ProductDto(
                 product.getProductId(),
-                product.getProductName(),
-                product.getDescription(),
+                product.getProductName().toLowerCase(),
+                product.getDescription().toLowerCase(),
                 product.getPrice(),
                 product.getStockQuantity(),
-                product.getCategory(),
-                product.getMark(),
+                product.getCategory().toLowerCase(),
+                product.getMark().toLowerCase(),
                 product.getCreationDate(),
                 product.getLastUpdate(),
-                product.getStatus()
-                //product.getImage()
+                product.getStatus().toLowerCase()
         );
     }
 
     public  static  Product mapToProduct (ProductDto productDto){
         return new Product(
                 productDto.getProductId(),
-                productDto.getProductName(),
-                productDto.getDescription(),
+                productDto.getProductName().toLowerCase(),
+                productDto.getDescription().toLowerCase(),
                 productDto.getPrice(),
                 productDto.getStockQuantity(),
-                productDto.getCategory(),
-                productDto.getMark(),
+                productDto.getCategory().toLowerCase(),
+                productDto.getMark().toLowerCase(),
                 productDto.getCreationDate(),
                 productDto.getLastUpdate(),
-                productDto.getStatus()
-                //productDto.getImage()
+                productDto.getStatus().toLowerCase()
         );
     }
-
-    /*private Date mapToDate(String dateString) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-        return dateFormat.parse(dateString);
-    }*/
 }
