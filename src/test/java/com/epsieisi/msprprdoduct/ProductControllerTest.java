@@ -18,10 +18,9 @@ import java.util.Date;
 
 import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.BodyBuilder.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,8 +44,6 @@ public class ProductControllerTest {
         productDto.setMark("Molten");
         productDto.setPrice(36.50f);
         productDto.setStockQuantity(25);
-        productDto.setCreationDate(timestamp);
-        productDto.setLastUpdate(timestamp);
 
         String productJson = objectMapper.writeValueAsString(productDto);
 
@@ -78,12 +75,15 @@ public class ProductControllerTest {
                 .andExpect(status().isOk());
     }
 
-    /*
+
     @Test
-    void testDecrementStock() {
-        Long productId = 1L;
-        Integer askedQuantity = 5;
-        mockMvc.perform(put())
-    }*/
+    public void decrementStock() throws Exception{
+        Long productId = 4L;
+        Integer orderedQuantity = 80;
+        mockMvc.perform(put("/api/products/{id}/{quantity}",productId,orderedQuantity).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.stockQuantity").value(320));
+    }
+
 
 }

@@ -49,7 +49,10 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable("id") Long productId,
-                                                                         @RequestBody ProductDto updatedProduct){
+                                                    @RequestBody ProductDto updatedProduct){
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(currentDateTime);
+        updatedProduct.setLastUpdate(timestamp);
         ProductDto productDto = productService.updateProduct(productId, updatedProduct);
         return ResponseEntity.ok(productDto);
     }
@@ -59,6 +62,7 @@ public class ProductController {
         productService.deleteProduct(productId);
         return ResponseEntity.ok("Product deleted successfully");
     }
+
 
     @PutMapping("/{id}/{quantity}")
     public ResponseEntity<ProductDto> decrementStock(@PathVariable("id") Long productId,@PathVariable("quantity") Integer askedQuantity) {

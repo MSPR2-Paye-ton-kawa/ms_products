@@ -12,30 +12,30 @@ public class ProductMapper {
     public  static ProductDto mapToProductDto(Product product){
         return new ProductDto(
                 product.getProductId(),
-                product.getProductName().toLowerCase(),
-                product.getDescription().toLowerCase(),
+                product.getProductName(),
+                product.getDescription(),
                 product.getPrice(),
                 product.getStockQuantity(),
-                product.getCategory().toLowerCase(),
-                product.getMark().toLowerCase(),
+                product.getCategory(),
+                product.getMark(),
                 product.getCreationDate(),
                 product.getLastUpdate(),
-                product.getStatus().toLowerCase()
+                product.getStatus()
         );
     }
 
     public  static  Product mapToProduct (ProductDto productDto){
         return new Product(
                 productDto.getProductId(),
-                productDto.getProductName().toLowerCase(),
-                productDto.getDescription().toLowerCase(),
+                productDto.getProductName(),
+                productDto.getDescription(),
                 productDto.getPrice(),
                 productDto.getStockQuantity(),
-                productDto.getCategory().toLowerCase(),
-                productDto.getMark().toLowerCase(),
+                productDto.getCategory(),
+                productDto.getMark(),
                 productDto.getCreationDate(),
                 productDto.getLastUpdate(),
-                productDto.getStatus().toLowerCase()
+                productDto.getStatus()
         );
     }
 }

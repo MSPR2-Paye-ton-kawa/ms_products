@@ -10,6 +10,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +31,10 @@ public class ProductServiceImp implements ProductService{
 
     @Override
     public ProductDto createProduct(ProductDto productDto) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(currentDateTime);
+        productDto.setLastUpdate(timestamp);
+        productDto.setCreationDate(timestamp);
         Product product = ProductMapper.mapToProduct(productDto);
         return ProductMapper.mapToProductDto(productRepository.save(product));
     }
@@ -46,6 +52,8 @@ public class ProductServiceImp implements ProductService{
         Product product = productRepository.findById(productId).orElseThrow(
                 () -> new ResourceNotFoundException("The product doesn't exist in the database")
         );
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(currentDateTime);
         product.setProductName(productDto.getProductName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
@@ -53,7 +61,7 @@ public class ProductServiceImp implements ProductService{
         product.setCategory(productDto.getCategory());
         product.setMark(productDto.getMark());
         product.setCreationDate(productDto.getCreationDate());
-        product.setLastUpdate(productDto.getLastUpdate());
+        product.setLastUpdate(timestamp);
         product.setStatus(productDto.getStatus());
         return ProductMapper.mapToProductDto(productRepository.save(product));
     }
@@ -92,6 +100,5 @@ public class ProductServiceImp implements ProductService{
             throw new ResourceNotFoundException("The product doesn't exist in the database");
         }
     }
-
 
 }
