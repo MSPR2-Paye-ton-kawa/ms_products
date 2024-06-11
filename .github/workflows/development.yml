@@ -58,3 +58,26 @@ jobs:
 
     - name: Push to DockerHub
       run: docker push rafenitra/mspr-product:latest
+
+  security-checker:
+    name: SecurityChecker
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "SecurityChecker step"
+  coding-standards:
+    name: CodingStandards (Sonar)
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "CodingStandards step"
+  unit-test:
+    needs: [ security-checker, coding-standards ]
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Unit tests step"
+  deploy:
+    needs: [ build ]
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Unit tests step"
