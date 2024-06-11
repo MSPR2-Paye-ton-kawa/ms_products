@@ -14,9 +14,9 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_DB: yourdb
-          POSTGRES_USER: youruser
-          POSTGRES_PASSWORD: yourpassword
+          POSTGRES_DB: mspr
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: root
         ports:
           - 5432:5432
 
@@ -48,7 +48,7 @@ jobs:
       run: mvn test
 
     - name: Build Docker image
-      run: docker build . -t yourusername/your-app:latest
+      run: docker build . -t rafenitra/mspr-product:latest
 
     - name: Login to DockerHub
       uses: docker/login-action@v2
@@ -57,4 +57,4 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Push to DockerHub
-      run: docker push yourusername/your-app:latest
+      run: docker push rafenitra/mspr-product:latest
