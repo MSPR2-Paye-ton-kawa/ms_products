@@ -65,6 +65,7 @@ jobs:
             sleep 1 
           done
           echo "PostgreSQL is ready!"
+          
         #Run unit tests
       - name: Run unit tests
         run: mvn test
