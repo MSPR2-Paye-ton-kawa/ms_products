@@ -39,8 +39,14 @@ public class Product {
 
     private String status;
 
-    /*@Lob
-    @Column(columnDefinition = "bytea")
-    private byte[] image;
-    */
+
+    public Product(String productName, String description, Float price, int stockQuantity, String category, String mark, String status) {
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.category = category;
+        this.mark = mark;
+        this.status = status;
+    }
 }
