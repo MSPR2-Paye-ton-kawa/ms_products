@@ -8,6 +8,7 @@ class MsprPrdoductApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
