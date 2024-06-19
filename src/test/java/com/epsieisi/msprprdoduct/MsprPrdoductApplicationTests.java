@@ -8,11 +8,6 @@ class MsprPrdoductApplicationTests {
 
 	@Test
 	void contextLoads() {
-<<<<<<< HEAD
-=======
-
-	}
->>>>>>> test
 
 	}
 }

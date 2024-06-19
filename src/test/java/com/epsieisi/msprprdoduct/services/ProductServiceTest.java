@@ -1,4 +1,4 @@
-package com.epsieisi.msprprdoduct;
+package com.epsieisi.msprprdoduct.services;
 
 import com.epsieisi.msprprdoduct.dto.ProductDto;
 import com.epsieisi.msprprdoduct.exceptions.ResourceNotFoundException;

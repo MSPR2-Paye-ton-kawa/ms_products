@@ -81,7 +81,7 @@ public class ProductControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(productJson))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.productName").value("productname1"))
+                .andExpect(jsonPath("$.productName").value("productName1"))
                 .andExpect(jsonPath("$.description").value("description1"))
                 .andExpect(jsonPath("$.price").value(10.0));
     }
