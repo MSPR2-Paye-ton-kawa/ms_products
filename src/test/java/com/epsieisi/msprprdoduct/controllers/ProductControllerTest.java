@@ -43,7 +43,7 @@ public class ProductControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Mock
+    @Autowired
     private ProductService productService;
 
     @InjectMocks
