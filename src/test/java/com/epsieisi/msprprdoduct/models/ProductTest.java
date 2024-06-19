@@ -1,6 +1,7 @@
 package com.epsieisi.msprprdoduct.models;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest
 public class ProductTest {
     @Test
     void testProductAllArgsConstructor() {
