@@ -40,7 +40,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
         #Run unit tests
       - name: Run unit tests
-        run: mvn clean test
+        run: mvn -B test
 
   build:
     needs: [unit-test]
