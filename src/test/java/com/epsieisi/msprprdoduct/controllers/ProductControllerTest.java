@@ -1,4 +1,4 @@
-/*package com.epsieisi.msprprdoduct.controllers;
+package com.epsieisi.msprprdoduct.controllers;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -185,4 +185,3 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.productName").value("productName"));
     }
 }
-*/
