@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductTest {
     @Test
     void testProductAllArgsConstructor() {
-        Product playStation = new Product("PS5", "playstation 5 V2.0", 542.36f, 20, "Jeux multimedia", "Sony","promotion");
+        Product product = new Product("productname", "description ", 10f, 10, "category", "mark","status");
 
-        assertThat(playStation).isNotNull();
-        assertThat(playStation.getProductName()).isEqualTo("PS5");
-        assertThat(playStation.getPrice()).isEqualTo(542.36f);
-        assertThat(playStation.getStockQuantity()).isEqualTo(20);
-        assertThat(playStation.getMark()).isEqualTo("Sony");
-        assertThat(playStation.getStatus()).isEqualTo("promotion");
+        assertThat(product).isNotNull();
+        assertThat(product.getProductName()).isEqualTo("productname");
+        assertThat(product.getPrice()).isEqualTo(10f);
+        assertThat(product.getStockQuantity()).isEqualTo(10);
+        assertThat(product.getMark()).isEqualTo("mark");
+        assertThat(product.getStatus()).isEqualTo("status");
     }
 
     @Test
