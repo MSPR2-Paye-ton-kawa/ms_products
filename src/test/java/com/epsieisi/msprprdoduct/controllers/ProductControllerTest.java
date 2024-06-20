@@ -1,12 +1,23 @@
 package com.epsieisi.msprprdoduct.controllers;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Collections;
+
+import com.epsieisi.msprprdoduct.controllers.ProductController;
 import com.epsieisi.msprprdoduct.dto.ProductDto;
-import com.epsieisi.msprprdoduct.exceptions.ResourceNotFoundException;
 import com.epsieisi.msprprdoduct.mappers.ProductMapper;
 import com.epsieisi.msprprdoduct.models.Product;
 import com.epsieisi.msprprdoduct.services.ProductService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,30 +31,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Date;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.BodyBuilder.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ProductControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
+
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
+    @Mock
     private ProductService productService;
 
     @InjectMocks
@@ -184,5 +184,4 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.stockQuantity").value(8))// Stock should be decremented by 2
                 .andExpect(jsonPath("$.productName").value("productName"));
     }
-
 }
