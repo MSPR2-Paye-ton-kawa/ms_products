@@ -1,4 +1,4 @@
-/*package com.epsieisi.msprprdoduct.repositories;
+package com.epsieisi.msprprdoduct.repositories;
 
 import com.epsieisi.msprprdoduct.models.Product;
 import org.junit.jupiter.api.BeforeEach;
@@ -111,4 +111,3 @@ public class ProductRepositoryTest {
         assertThat(productRepository.findById(savedProduct.getProductId())).isNotPresent();
     }
 }
-*/
